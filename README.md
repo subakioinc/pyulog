@@ -1,39 +1,35 @@
 # pyulog
 
-This repository contains a python package to parse ULog files and scripts to
-convert and display them. ULog is a self-describing logging format which is
-documented [here](https://dev.px4.io/en/log/ulog_file_format.html).
+이 프로젝트는 ULog 파일을 파싱해서 변환 및 표시할 수 있는 python package이다. ULog는 self-describing logging 포맷으로 되어 있다. 관련 문서는 [여기](https://dev.px4.io/en/log/ulog_file_format.html)를 참고하자.
 
-The provided [command line scripts](#scripts) are:
-- `ulog_info`: display information from an ULog file.
-- `ulog_messages`: display logged messages from an ULog file.
-- `ulog_params`: extract parameters from an ULog file.
-- `ulog2csv`: convert ULog to CSV files.
-- `ulog2kml`: convert ULog to KML files.
+제공하는 [command line scripts](#scripts)는 :
+- `ulog_info`: ULog 파일의 정보를 표시
+- `ulog_messages`: ULog 파일로부터 logged message를 표시
+- `ulog_params`: ULog 파일로부터 parameter 추출
+- `ulog2csv`: ULog 파일을 CSV 파일로 변환
+- `ulog2kml`: ULog 파일을 KML 파일로 변환
 
+## 설치
 
-## Installation
-
-Installation with package manager:
+package 매니저로 설치하기:
 ```bash
 pip install pyulog
 ```
 
-Installation from source:
+소스코드로 설치하기:
 ```bash
 python setup.py build install
 ```
 
-## Development
+## 개발
 
-To install the code in a format so that it can be easily edited use the
-following command (this will install the package as a link to the repo):
+해당 code를 설치하기 위해서 다음 명령을 사용하여 쉽게 수정할 수 있다.(이렇게 하면 package를 repo에 대한 link로 설치된다.) :
 
 ```bash
 pip install -e .
 ```
 
-## Testing
+## 테스팅
 
 ```bash
 nosetests -sv
@@ -54,27 +50,27 @@ pylint pyulog/*.py
 <span id="scripts"></span>
 ## Command Line Scripts
 
-All scripts are installed as system-wide applications (i.e. they be called on the command line without specifying Python or a system path), and support the `-h` flag for getting usage instructions.
+모든 script들은 시스템 어플리케이션으로 설치된다.(Python을 지정하거나 system 경로를 지정하지 않고 터미널에서 바로 실행가능) `-h` flag를 지원하여 도움말을 얻을 수 있다.
 
-The sections below show the usage syntax and sample output (from [test/sample.ulg](test/sample.ulg)): 
+아래 섹션에서는 사용법과 sample 출력을 보여준다. ([test/sample.ulg](test/sample.ulg)): 
 
-###  Display information from an ULog file (ulog_info)
+###  ULog 파일의 정보 표시 (ulog_info)
 
-Usage:
+사용법:
 ```bash
 usage: ulog_info [-h] [-v] file.ulg
 
-Display information from an ULog file
+ULog 파일의 정보를 표시한다.
 
-positional arguments:
+위치 arguments:
   file.ulg       ULog input file
 
-optional arguments:
-  -h, --help     show this help message and exit
-  -v, --verbose  Verbose output
+옵션 arguments:
+  -h, --help     도움말을 보여준다.
+  -v, --verbose  실행 상세 내용을 출력
 ```
 
-Example output:
+예제 출력:
 ```bash
 $ ulog_info sample.ulg
 Logging start time: 0:01:52, duration: 0:01:08
@@ -103,9 +99,9 @@ Name (multi id, message size in bytes)    number of data points, total bytes
  vehicle_status (0, 45)                       294      13230
 ```
 
-### Display logged messages from an ULog file (ulog_messages)
+### ULog 파일로부터 logged 메시지를 표시 (ulog_messages)
 
-Usage:
+사용법:
 ```
 usage: ulog_messages [-h] file.ulg
 
@@ -118,7 +114,7 @@ optional arguments:
   -h, --help  show this help message and exit
 ```
 
-Example output:
+예제 출력:
 ```
 ubuntu@ubuntu:~/github/pyulog/test$ ulog_messages sample.ulg
 0:02:38 ERROR: [sensors] no barometer found on /dev/baro0 (2)
@@ -127,9 +123,9 @@ ubuntu@ubuntu:~/github/pyulog/test$ ulog_messages sample.ulg
 0:02:56 ERROR: [sensors] no barometer found on /dev/baro0 (2)
 ```
 
-### Extract parameters from an ULog file (ulog_params)
+### ULog 파일로부터 parameter 추출 (ulog_params)
 
-Usage:
+사용법:
 ```
 usage: ulog_params [-h] [-d DELIMITER] [-i] [-o] file.ulg [params.txt]
 
@@ -147,7 +143,7 @@ optional arguments:
   -o, --octave          Use Octave format
 ```
 
-Example output (to console):
+예제 출력 (콘솔에):
 ```
 ubuntu@ubuntu:~/github/pyulog/test$ ulog_params sample.ulg
 ATT_ACC_COMP,1
@@ -161,9 +157,9 @@ VT_WV_LTR_EN,0
 VT_WV_YAWR_SCL,0.15000000596
 ```
 
-### Convert ULog to CSV files (ulog2csv)
+### ULog를 CSV 파일로 변환 (ulog2csv)
 
-Usage:
+사용법:
 ```
 usage: ulog2csv [-h] [-m MESSAGES] [-d DELIMITER] [-o DIR] file.ulg
 
@@ -184,14 +180,14 @@ optional arguments:
 ```
 
 
-### Convert ULog to KML files (ulog2kml)
+### ULog 파일을 KML 파일로 변환 (ulog2kml)
 
-> **Note** The `simplekml` module must be installed on your computer. If not already present, you can install it with:
+> **Note** `simplekml` 모듈이 반드시 설치되어 있어야 한다. 만약 설치되어 있지 않은 경우 다음과 같이 설치한다 :
   ```
   pip install simplekml
   ```
 
-Usage:
+사용법:
 ```
 usage: ulog2kml [-h] [-o OUTPUT_FILENAME] [--topic TOPIC_NAME]
                 [--camera-trigger CAMERA_TRIGGER]
