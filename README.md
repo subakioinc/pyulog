@@ -13,7 +13,7 @@
 
 package 매니저로 설치하기:
 ```bash
-pip install pyulog
+sudo pip3 install pyulog
 ```
 
 소스코드로 설치하기:
